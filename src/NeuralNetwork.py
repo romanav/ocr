@@ -12,5 +12,7 @@ class NeuralNetwork:
         self.wih = numpy.random.normal(0.0, pow(self.input_nodes, -0.5), (self.hidden_nodes, self.input_nodes))
         self.who = numpy.random.normal(0.0, pow(self.hidden_nodes, -0.5), (self.output_nodes, self.hidden_nodes))
 
-        self._activation_function = lambda x: scipy.special.expi(x)
+        self._activation_function = lambda x: scipy.special.expit(x)
 
+    def query(self, input_list):
+        inputs = numpy.array(input_list, ndmin=2).T

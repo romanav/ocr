@@ -1,7 +1,12 @@
 import numpy
 
+from src.NeuralNetwork import NeuralNetwork
+
 random_matrix = numpy.random.rand(3, 3) - .5
 print(random_matrix)
 
-wih = numpy.random.normal(0.0, pow(3, -0.5), (3, 3))
-print(wih)
+nn = NeuralNetwork(3, 3, 3)
+
+a = numpy.array([1, 2, 3, 4], ndmin=2).T
+
+print(a)
