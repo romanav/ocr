@@ -1,12 +1,6 @@
-import numpy
-
 from src.NeuralNetwork import NeuralNetwork
 
-random_matrix = numpy.random.rand(3, 3) - .5
-print(random_matrix)
-
 nn = NeuralNetwork(3, 3, 3)
+response = nn.query([1.0, 0.5, -1.5])
 
-a = numpy.array([1, 2, 3, 4], ndmin=2).T
-
-print(a)
+print(response)
