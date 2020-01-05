@@ -7,3 +7,5 @@
 /venv/
 /venv3/
 /.idea/
+resources/mnist_test.csv
+resources/mnist_train.csv
