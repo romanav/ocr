@@ -2,6 +2,7 @@ import numpy
 
 from NeuralNetwork import NeuralNetwork
 
+
 input_nodes = 28 * 28
 hidden_nodes = 100
 output_nodes = 10
@@ -27,8 +28,16 @@ nn = NeuralNetwork(
 
 
 def train():
-    training_data_list = read_file('resources/mnist_train_100.csv')
+    training_data_list = read_file('resources/mnist_train.csv')
+
+    data_size = len(training_data_list)
+    cnt = 1
+    print("data_size: " + str(data_size))
+
     for r in training_data_list:
+        print(str(cnt/data_size*100)+"%")
+        cnt += 1
+
         all_values = r.split(',')
         inputs = adopt_image_to_neuro(all_values)
         targets = numpy.zeros(output_nodes) + 0.01
