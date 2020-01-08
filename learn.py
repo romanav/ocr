@@ -1,13 +1,13 @@
+
 import numpy
 
 from NeuralNetwork import NeuralNetwork
-
 
 input_nodes = 28 * 28
 hidden_nodes = 100
 output_nodes = 10
 
-learning_rate = 0.3
+learning_rate = 0.2
 
 
 def adopt_image_to_neuro(values):
@@ -27,16 +27,16 @@ nn = NeuralNetwork(
 )
 
 
-def train():
-    training_data_list = read_file('resources/mnist_train.csv')
+def train(train_path):
+    training_data_list = read_file(train_path)
 
-    data_size = len(training_data_list)
-    cnt = 1
-    print("data_size: " + str(data_size))
+    # data_size = len(training_data_list)
+    # cnt = 1
+    # print("data_size: " + str(data_size))
 
     for r in training_data_list:
-        print(str(cnt/data_size*100)+"%")
-        cnt += 1
+        # print(str(cnt / data_size * 100) + "%")
+        # cnt += 1
 
         all_values = r.split(',')
         inputs = adopt_image_to_neuro(all_values)
@@ -45,16 +45,24 @@ def train():
         nn.train(inputs, targets)
 
 
-def test():
-    test_file = 'resources/mnist_test_10.csv'
+def test(test_file):
+    score_card = []
     test_data_list = read_file(test_file)
     for val in test_data_list:
         all_values = val.split(',')
-        print(all_values[0])
+        correct_label = int(all_values[0])
+
         image = adopt_image_to_neuro(all_values)
-        print(nn.query(image))
-        print()
+        outputs = nn.query(image)
+        label = numpy.argmax(outputs)
+
+        score_card.append(1 if label == correct_label else 0)
+
+    return numpy.asarray(score_card)
 
 
-train()
-test()
+print("training")
+train('resources/mnist_train.csv')
+print("testing")
+result = test('resources/mnist_test.csv')
+print("performance:", result.sum() / result.size)
