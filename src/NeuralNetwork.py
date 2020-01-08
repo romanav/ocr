@@ -28,7 +28,8 @@ class NeuralNetwork:
 
         hidden_inputs = numpy.dot(self.wih, inputs)
         hidden_outputs = self._activation_function(hidden_inputs)
-        final_outputs = numpy.dot(self.who, hidden_outputs)
+        final_inputs = numpy.dot(self.who, hidden_outputs)
+        final_outputs = self._activation_function(final_inputs)
 
         output_errors = targets - final_outputs
         hidden_errors = numpy.dot(self.who.T, output_errors)
