@@ -19,7 +19,8 @@ class NeuralNetwork:
         inputs = numpy.array(input_list, ndmin=2).T
         hidden_inputs = numpy.dot(self.wih, inputs)
         hidden_outputs = self._activation_function(hidden_inputs)
-        final_outputs = numpy.dot(self.who, hidden_outputs)
+        final_inputs = numpy.dot(self.who, hidden_outputs)
+        final_outputs = self._activation_function(final_inputs)
         return final_outputs
 
     def train(self, input_list, targets_list):
